@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Position {
 
-    public int positionX;
-    public int positionY;
+    public int x;
+    public int y;
 
     public Position(int x, int y){
-        this.positionX = x;
-        this.positionY = y;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -17,13 +17,13 @@ public class Position {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return positionX == position.positionX &&
-                positionY == position.positionY;
+        return x == position.x &&
+                y == position.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(positionX, positionY);
+        return Objects.hash(x, y);
     }
 
     /**
@@ -32,8 +32,8 @@ public class Position {
     @Override
     public String toString() {
         return "Position{" +
-                "positionX=" + positionX +
-                ", positionY=" + positionY +
+                "x=" + x +
+                ", y=" + y +
                 '}';
     }
 }

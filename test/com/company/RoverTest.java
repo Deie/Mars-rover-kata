@@ -8,157 +8,139 @@ public class RoverTest {
     @Test
     public void should_move_forward() {
         // given
-        Rover rover = new Rover();
-        Grid grid = new Grid(10, 10, -10, -10);
-        rover.getGrid(grid);
-        rover.setOrientation(Orientation.SOUTH);
-        Position position = new Position(3,6);
-        rover.setPosition(position);
+        Rover rover = Rover.create(Orientation.SOUTH, 3, 6, new Grid(0, 0, 10, 10));
 
         // when
         rover.moveForward();
 
         // then
-        final Position expectedPosition = new Position(3, 5);
-        final Position finalPosition = rover.getPosition();
-
-        assertEquals(expectedPosition, finalPosition);
+        final Rover expectedRover = Rover.create(Orientation.SOUTH, 3,5, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover, rover);
 
     }
 
     @Test
     public void should_move_backward() {
         // given
-        Rover rover = new Rover();
-        Grid grid = new Grid(10, 10, -10, -10);
-        rover.getGrid(grid);
-        rover.setOrientation(Orientation.WEST);
-        Position position = new Position(8,8);
-        rover.setPosition(position);
+        Rover rover = Rover.create(Orientation.WEST, 8, 8, new Grid(0, 0, 10, 10));
+
 
         // given
         rover.moveBackward();
 
         // then
-        final Position expectedPosition = new Position(9, 8);
-        final Position finalPosition = rover.getPosition();
-
-        assertEquals(expectedPosition, finalPosition);
+        final Rover expectedRover = Rover.create(Orientation.WEST, 9,8, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover, rover);
 
     }
 
     @Test
     public void should_turn_to_the_right() {
         // given
-        Rover rover = new Rover();
-        Grid grid = new Grid(10, 10, -10, -10);
-        rover.getGrid(grid);
-        rover.setOrientation(Orientation.SOUTH);
-        rover.getOrientation();
+        Rover rover = Rover.create(Orientation.SOUTH, 3, 6, new Grid(0, 0, 10, 10));
 
         // when
         rover.turnRight();
 
         // then
-        final Orientation expectedOrientation = Orientation.WEST;
-        final Orientation finalOrientation = rover.getOrientation();
-
-        assertEquals(expectedOrientation, finalOrientation);
+        final Rover expectedRover = Rover.create(Orientation.WEST, 3,6, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover, rover);
 
     }
 
     @Test
     public void should_turn_to_the_left() {
-        Rover rover = new Rover();
-        Grid grid = new Grid(10, 10, -10, -10);
-        rover.getGrid(grid);
-        rover.setOrientation(Orientation.WEST);
+        // given
+        Rover rover = Rover.create(Orientation.WEST, 3, 6, new Grid(0, 0, 10, 10));
 
         // when
         rover.turnLeft();
 
         // then
-        final Orientation expectedOrientation = Orientation.SOUTH;
-        final Orientation finalOrientation = rover.getOrientation();
-
-        assertEquals(expectedOrientation, finalOrientation);
+        final Rover expectedRover = Rover.create(Orientation.SOUTH, 3,6, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover, rover);
 
     }
 
     @Test
     public void should_take_an_order_one_at_a_time() {
         // given
-        Rover rover = new Rover();
-        rover.setOrientation(Orientation.NORTH);
-        Position position = new Position(8,8);
-        rover.setPosition(position);
+        Rover rover = Rover.create(Orientation.NORTH, 8, 8, new Grid(0, 0, 10, 10));
 
         // when
         rover.execute("L");
 
+
         // then
-        final Orientation firstExpectedOrientation = Orientation.WEST;
-        final Orientation firstFinalOrientation = rover.getOrientation();
-        assertEquals(firstExpectedOrientation, firstFinalOrientation);
+        final Rover expectedRover = Rover.create(Orientation.WEST, 8,8, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover, rover);
 
         rover.execute("L");
-        final Orientation secondExpectedOrientation = Orientation.SOUTH;
-        final Orientation secondFinalOrientation = rover.getOrientation();
-        assertEquals(secondExpectedOrientation, secondFinalOrientation);
+        final Rover expectedRover1 = Rover.create(Orientation.SOUTH, 8,8, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover1, rover);
 
         rover.execute("L");
-        final Orientation thirdExpectedOrientation = Orientation.EAST;
-        final Orientation thirdFinalOrientation = rover.getOrientation();
-        assertEquals(thirdExpectedOrientation, thirdFinalOrientation);
+        final Rover expectedRover2 = Rover.create(Orientation.EAST, 8,8, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover2, rover);
 
     }
 
     @Test
     public void should_take_a_list_of_orders_moving_forward() {
         //given
-        Rover rover = new Rover();
-        rover.setOrientation(Orientation.NORTH);
-        Position position = new Position(1,2);
-        rover.setPosition(position);
+        Rover rover = Rover.create(Orientation.NORTH, 1, 2, new Grid(0, 0, 10, 10));
+
 
         // when
         rover.execute("LFLFLFLFF");
 
-        ///then
-        final Position expectedPosition = new Position(1,3);
-        final Orientation expectedOrientation = Orientation.NORTH;
+        //then
+        final Rover expectedRover = Rover.create(Orientation.NORTH, 1,3, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover, rover);
 
-        final Position finalPosition = rover.getPosition();
-        final Orientation finalOrientation = rover.getOrientation();
-        System.out.println(finalPosition + " " + finalOrientation);
-
-        assertEquals(expectedOrientation, finalOrientation);
-        assertEquals(expectedPosition, finalPosition);
     }
 
     @Test
-    public void shouldTakeAListOfOrdersMovingBackward() {
+    public void should_take_a_list_of_orders_moving_backward() {
         // given
-        Rover rover = new Rover();
+        Rover rover = Rover.create(Orientation.EAST, 3, 3, new Grid(0, 0, 10, 10));
 
-        rover.setOrientation(Orientation.EAST);
-        Position position = new Position(3,3);
-        rover.setPosition(position);
 
         /// when
         rover.execute("FFRFFRFRRF");
 
         // then
-        final Orientation expectedOrientation = Orientation.EAST;
-        final Position expectedPosition = new Position(5, 1);
-
-        final Position finalPosition = rover.getPosition();
-        final Orientation finalOrientation = rover.getOrientation();
-        System.out.println(finalPosition + " " + finalOrientation);
+        final Rover expectedRover = Rover.create(Orientation.EAST, 5,1, new Grid(0, 0, 10, 10));
+        assertEquals(expectedRover, rover);
 
 
-        assertEquals(expectedOrientation, finalOrientation);
-        assertEquals(expectedPosition, finalPosition);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void should_be_blocked_at_grid_border_when_goes_too_forward_left() {
+        // given
+        Rover rover = Rover.create(Orientation.NORTH, 3, 10, new Grid(0, 0, 10, 10));
+
+
+        /// when
+        rover.moveForward();
+
+        // then
+        //expected
+
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void should_be_blocked_at_grid_border_when_goes_too_forward_right() {
+        // given
+        Rover rover = Rover.create(Orientation.SOUTH, 3, 0, new Grid(0, 0, 10, 10));
+
+
+        /// when
+        rover.moveForward();
+
+        // then
+        //expected
 
     }
 }

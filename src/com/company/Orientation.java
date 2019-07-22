@@ -7,16 +7,22 @@ public enum Orientation {
             return EAST;
         }
 
-        Orientation turnLeft() {
-            return WEST;
+        Orientation turnLeft() { return WEST; }
+
+        Position moveForward(Position position, Grid grid) {
+
+            if(position.y < grid.getMaxY() && position.y > grid.getMinY()) {
+                return new Position(position.x, position.y + 1);
+            }
+            throw new RuntimeException("Oops you out the grid" );
         }
 
-        Position moveForward(Position position) {
-            return new Position(position.positionX, position.positionY + 1);
-        }
+        Position moveBackward(Position position, Grid grid) {
+            if(position.y < grid.getMaxY() && position.y > grid.getMinY()) {
+                return new Position(position.x, position.y - 1);
+            }
+            throw new RuntimeException("Oops you out the grid" );
 
-        Position moveBackward(Position position) {
-            return new Position(position.positionX, position.positionY - 1);
         }
     },
     EAST {
@@ -28,12 +34,21 @@ public enum Orientation {
             return NORTH;
         }
 
-        Position moveForward(Position position) {
-            return new Position(position.positionX + 1, position.positionY);
+        Position moveForward(Position position, Grid grid) {
+
+            if(position.x < grid.getMaxX() && position.x > grid.getMinX()) {
+                return new Position(position.x + 1, position.y);
+            }
+            throw new RuntimeException("Oops you out the grid" );
         }
 
-        Position moveBackward(Position position) {
-            return new Position(position.positionX - 1, position.positionY);
+        Position moveBackward(Position position, Grid grid) {
+
+            if(position.x < grid.getMaxX() && position.x > grid.getMinX()) {
+                return new Position(position.x - 1, position.y);
+            }
+            throw new RuntimeException("Oops you out the grid" );
+
         }
     },
     SOUTH {
@@ -45,12 +60,20 @@ public enum Orientation {
             return EAST;
         }
 
-        Position moveForward(Position position) {
-            return new Position(position.positionX, position.positionY - 1);
+        Position moveForward(Position position, Grid grid) {
+
+            if(position.y < grid.getMaxY() && position.y > grid.getMinY()) {
+                return new Position(position.x, position.y - 1);
+            }
+            throw new RuntimeException("Oops you out the grid" );
         }
 
-        Position moveBackward(Position position) {
-            return new Position(position.positionX, position.positionY + 1);
+        Position moveBackward(Position position, Grid grid) {
+
+            if(position.y < grid.getMaxY() && position.y > grid.getMinY()) {
+                return new Position(position.x, position.y + 1);
+            }
+            throw new RuntimeException("Oops you out the grid" );
         }
     },
     WEST {
@@ -62,12 +85,22 @@ public enum Orientation {
             return SOUTH;
         }
 
-        Position moveForward(Position position) {
-            return new Position(position.positionX - 1, position.positionY);
+        Position moveForward(Position position, Grid grid) {
+
+            if(position.x < grid.getMaxX() && position.x > grid.getMinX()) {
+                return new Position(position.x - 1, position.y);
+            }
+            throw new RuntimeException("Oops you out the grid" );
+
         }
 
-        Position moveBackward(Position position) {
-            return new Position(position.positionX + 1, position.positionY);
+        Position moveBackward(Position position, Grid grid) {
+
+            if(position.x < grid.getMaxX() && position.x > grid.getMinX()) {
+                return new Position(position.x + 1, position.y);
+            }
+            throw new RuntimeException("Oops you out the grid" );
+
         }
     };
 
@@ -76,9 +109,9 @@ public enum Orientation {
 
     abstract Orientation turnLeft();
 
-    abstract Position moveForward(Position position);
+    abstract Position moveForward(Position position, Grid grid);
 
-    abstract Position moveBackward(Position position);
+    abstract Position moveBackward(Position position, Grid grid);
 
 
 
