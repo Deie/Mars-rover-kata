@@ -1,6 +1,5 @@
 package com.company.alex.client;
 
-import com.company.Hola.Command;
 import com.company.alex.User;
 import com.company.alex.UserQuery;
 

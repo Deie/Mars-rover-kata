@@ -39,7 +39,7 @@ public class Rover {
     }
 
     public void moveBackward() {
-        //position = orientation.moveBackward(position, );
+        position = orientation.moveBackward(position, grid);
     }
 
 
@@ -67,7 +67,7 @@ public class Rover {
         }else if(command.equals('F')){
             position = orientation.moveForward(position, grid);
         }else if(command.equals('B')){
-            //position = orientation.moveBackward(position, );
+            position = orientation.moveBackward(position, grid);
         }else {
             throw new AssertionError("Oops wrong command, try again" );
         }
